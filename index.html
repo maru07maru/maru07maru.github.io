@@ -1,0 +1,898 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>♡ 本日の要チェックGIRL ♡｜掲載HTMLメーカー</title>
+
+<style>
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  font-family:-apple-system,BlinkMacSystemFont,
+  "Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;
+  background:linear-gradient(135deg,#efffff,#fff0fb,#f7fff0);
+  color:#4b3b52;
+}
+
+.wrap{
+  max-width:760px;
+  margin:auto;
+  padding:20px 14px 50px;
+}
+
+h1{
+  text-align:center;
+  color:#ff35b7;
+  font-size:27px;
+  margin:4px 0 6px;
+}
+
+.sub{
+  text-align:center;
+  color:#777;
+  margin:0 0 20px;
+}
+
+.card{
+  background:#fff;
+  border:2px solid #ff75ca;
+  border-radius:20px;
+  padding:18px;
+  margin:14px 0;
+  box-shadow:0 8px 20px #d8c5dc55;
+}
+
+.step{
+  display:inline-block;
+  background:linear-gradient(90deg,#ff55bd,#a66bff);
+  color:#fff;
+  border-radius:999px;
+  padding:5px 11px;
+  font-size:12px;
+  font-weight:800;
+  margin-bottom:10px;
+}
+
+label{
+  display:block;
+  font-weight:800;
+  color:#e51aa2;
+  margin:12px 0 7px;
+}
+
+input,
+textarea{
+  width:100%;
+  border:2px solid #dddde8;
+  border-radius:13px;
+  padding:12px;
+  font-size:15px;
+  background:#fff;
+}
+
+input:focus,
+textarea:focus{
+  outline:none;
+  border-color:#ff55bd;
+}
+
+textarea{
+  min-height:80px;
+  resize:vertical;
+}
+
+.row{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+
+.photo-box{
+  border:2px dashed #55c9ee;
+  border-radius:15px;
+  padding:15px;
+  text-align:center;
+  background:#f8ffff;
+}
+
+input[type=file]{
+  border:0;
+  padding:8px;
+  background:transparent;
+}
+
+.photo-preview{
+  margin-top:10px;
+}
+
+.photo-preview img{
+  max-width:280px;
+  max-height:330px;
+  border-radius:13px;
+  object-fit:cover;
+}
+
+button{
+  width:100%;
+  border:0;
+  border-radius:14px;
+  padding:14px;
+  font-size:16px;
+  font-weight:800;
+  cursor:pointer;
+}
+
+.main{
+  background:linear-gradient(90deg,#ff55bd,#a66bff);
+  color:#fff;
+  margin-top:15px;
+}
+
+.copy{
+  background:#ff4fba;
+  color:#fff;
+}
+
+.clear{
+  background:#f0f1f5;
+  color:#666;
+  margin-top:8px;
+}
+
+.preview{
+  background:#fff;
+  border-radius:16px;
+  padding:16px;
+  text-align:center;
+  border:1px solid #eee;
+}
+
+.preview img{
+  max-width:320px;
+  width:100%;
+  height:auto;
+  border-radius:12px;
+}
+
+.output{
+  min-height:360px;
+  font-family:ui-monospace,monospace;
+  font-size:12px;
+}
+
+.note{
+  font-size:12px;
+  color:#888;
+  line-height:1.6;
+}
+
+.done{
+  display:none;
+  background:#effff4;
+  color:#16833a;
+  padding:12px;
+  border-radius:12px;
+  margin-top:10px;
+  font-weight:700;
+}
+
+@media(max-width:600px){
+
+  .row{
+    grid-template-columns:1fr;
+  }
+
+  h1{
+    font-size:23px;
+  }
+
+}
+</style>
+</head>
+
+
+<body>
+
+<div class="wrap">
+
+<h1>♡ 本日の要チェックGIRL ♡</h1>
+
+<p class="sub">
+入力して、画像を選ぶだけ。<br>
+掲載用HTMLを一発作成！
+</p>
+
+
+<!-- STEP 1 -->
+
+<div class="card">
+
+<span class="step">STEP 1</span>
+
+<label>女の子ページURL</label>
+
+<input
+id="girlUrl"
+type="url"
+placeholder="https://www.cityheaven.net/..."
+>
+
+<p class="note">
+女の子のページをクリックできるようにするためのURLです。
+</p>
+
+</div>
+
+
+<!-- STEP 2 -->
+
+<div class="card">
+
+<span class="step">STEP 2</span>
+
+<label>名前・年齢</label>
+
+<input
+id="girlName"
+placeholder="例：すみれ (22)"
+>
+
+
+<label>キャッチコピー</label>
+
+<input
+id="catchCopy"
+placeholder="例：高身長スレンダー美女‼"
+>
+
+
+<div class="row">
+
+<div>
+
+<label>スリーサイズ</label>
+
+<input
+id="size"
+placeholder="例：T163 B87(C) W55 H86"
+>
+
+</div>
+
+
+<div>
+
+<label>出勤時間</label>
+
+<input
+id="schedule"
+placeholder="例：09:30～19:00"
+>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- STEP 3 -->
+
+<div class="card">
+
+<span class="step">STEP 3</span>
+
+<label>女の子の画像</label>
+
+
+<div class="photo-box">
+
+<input
+id="photo"
+type="file"
+accept="image/*"
+>
+
+<div
+class="photo-preview"
+id="photoPreview"
+>
+
+<p class="note">
+ここをタップして画像を選択してください
+</p>
+
+</div>
+
+</div>
+
+<p class="note">
+iPhoneの写真から選択できます。
+</p>
+
+</div>
+
+
+<!-- STEP 4 -->
+
+<div class="card">
+
+<span class="step">STEP 4</span>
+
+<button
+class="main"
+onclick="makePage()"
+>
+
+✨ 掲載用HTMLを作成する
+
+</button>
+
+
+<div
+id="done"
+class="done"
+>
+
+✓ 完成！下のHTMLをコピーしてください。
+
+</div>
+
+</div>
+
+
+<!-- PREVIEW -->
+
+<div class="card">
+
+<span class="step">PREVIEW</span>
+
+<div
+class="preview"
+id="preview"
+>
+
+入力して
+「掲載用HTMLを作成する」
+を押してください
+
+</div>
+
+</div>
+
+
+<!-- HTML -->
+
+<div class="card">
+
+<span class="step">COPY</span>
+
+<label>
+掲載用HTML
+</label>
+
+
+<textarea
+id="output"
+class="output"
+readonly
+></textarea>
+
+
+<button
+class="copy"
+onclick="copyHTML()"
+>
+
+📋 HTMLをコピー
+
+</button>
+
+
+<button
+class="clear"
+onclick="clearAll()"
+>
+
+入力をリセット
+
+</button>
+
+</div>
+
+
+</div>
+
+
+<script>
+
+let imageData="";
+
+
+const $ = id =>
+document.getElementById(id);
+
+
+
+/* =========================
+   画像選択
+========================= */
+
+$("photo").addEventListener(
+"change",
+function(){
+
+const file=this.files[0];
+
+if(!file){
+return;
+}
+
+if(!file.type.startsWith("image/")){
+
+alert("画像ファイルを選択してください");
+
+return;
+
+}
+
+
+const reader=new FileReader();
+
+
+reader.onload=function(e){
+
+imageData=e.target.result;
+
+
+$("photoPreview").innerHTML=
+
+'<img src="' +
+imageData +
+'" alt="">';
+
+};
+
+
+reader.readAsDataURL(file);
+
+});
+
+
+
+/* =========================
+   HTMLエスケープ
+========================= */
+
+function esc(value){
+
+return String(value || "")
+.replace(
+/[&<>"']/g,
+function(match){
+
+return {
+
+"&":"&amp;",
+"<":"&lt;",
+">":"&gt;",
+'"':"&quot;",
+"'":"&#39;"
+
+}[match];
+
+}
+);
+
+}
+
+
+
+/* =========================
+   掲載HTML作成
+========================= */
+
+function makePage(){
+
+const url=
+$("girlUrl").value.trim() || "#";
+
+const name=
+$("girlName").value.trim()
+|| "女の子の名前";
+
+const catchCopy=
+$("catchCopy").value.trim()
+|| "本日のおすすめGIRL";
+
+const size=
+$("size").value.trim()
+|| "スリーサイズ";
+
+const schedule=
+$("schedule").value.trim()
+|| "出勤時間";
+
+
+
+/* プレビュー */
+
+$("preview").innerHTML=`
+
+<div
+style="
+border:1px dotted #2dc7ff;
+box-shadow:0 6px 7px #90bfd1;
+padding:18px;
+border-radius:14px;
+background:
+linear-gradient(
+40deg,
+#d1ffff,
+#ffedfc 25%,
+#fcffed 50%,
+#ffedfc 75%,
+#d1ffff
+);
+"
+>
+
+<div
+style="
+color:#ff00ff;
+font-size:22px;
+font-weight:bold;
+margin-bottom:12px;
+"
+>
+
+♡本日の要チェックGIRL♡
+
+</div>
+
+
+${
+imageData
+?
+`
+<img
+src="${imageData}"
+style="
+display:block;
+max-width:360px;
+width:100%;
+height:auto;
+margin:0 auto 10px;
+border-radius:12px;
+"
+>
+`
+:
+""
+}
+
+
+<div
+style="
+color:#ff00ff;
+font-size:22px;
+font-weight:bold;
+"
+>
+
+${esc(name)}
+
+</div>
+
+
+<div
+style="
+color:#ff00ff;
+font-size:18px;
+font-weight:bold;
+margin-top:5px;
+"
+>
+
+${esc(catchCopy)}
+
+</div>
+
+
+<div
+style="
+color:#ff00ff;
+font-size:18px;
+font-weight:bold;
+margin-top:5px;
+"
+>
+
+${esc(size)}
+
+</div>
+
+
+<div
+style="
+color:#ff00ff;
+font-size:18px;
+font-weight:bold;
+margin-top:5px;
+"
+>
+
+出勤時間 ${esc(schedule)}
+
+</div>
+
+</div>
+
+`;
+
+
+
+/* =========================
+   完成HTML
+========================= */
+
+const html =
+
+`
+<div
+style="
+border:1px dotted #2dc7ff;
+box-shadow:0 6px 7px #90bfd1;
+"
+>
+
+<div
+style="
+background:
+linear-gradient(
+40deg,
+#d1ffff,
+#ffedfc 25%,
+#fcffed 50%,
+#ffedfc 75%,
+#d1ffff
+);
+text-align:center;
+padding:18px;
+"
+>
+
+<div
+style="
+background:
+radial-gradient(
+rgba(43,216,255,.1) 10%,
+transparent 20%
+),
+radial-gradient(
+rgba(255,127,235,.1) 10%,
+transparent 20%
+);
+background-size:40px 40px;
+background-position:0 0,20px 20px;
+padding:15px;
+"
+>
+
+
+<div
+style="
+color:#ff00ff;
+font-size:22px;
+font-weight:bold;
+margin-bottom:12px;
+"
+>
+
+♡本日の要チェックGIRL♡
+
+</div>
+
+
+<a
+href="${esc(url)}"
+style="
+text-decoration:none;
+color:#ff00ff;
+"
+>
+
+
+${
+imageData
+?
+`
+<img
+src="${imageData}"
+alt=""
+style="
+display:block;
+max-width:360px;
+width:100%;
+height:auto;
+margin:0 auto 10px;
+border-radius:12px;
+"
+>
+`
+:
+""
+}
+
+
+<div
+style="
+font-size:22px;
+font-weight:bold;
+"
+>
+
+${esc(name)}
+
+</div>
+
+
+<div
+style="
+font-size:18px;
+font-weight:bold;
+margin-top:5px;
+"
+>
+
+${esc(catchCopy)}
+
+</div>
+
+
+<div
+style="
+font-size:18px;
+font-weight:bold;
+margin-top:5px;
+"
+>
+
+${esc(size)}
+
+</div>
+
+
+<div
+style="
+font-size:18px;
+font-weight:bold;
+margin-top:5px;
+"
+>
+
+出勤時間 ${esc(schedule)}
+
+</div>
+
+
+</a>
+
+
+</div>
+
+</div>
+
+</div>
+`;
+
+
+
+$("output").value=html;
+
+$("done").style.display="block";
+
+}
+
+
+
+/* =========================
+   コピー
+========================= */
+
+async function copyHTML(){
+
+const value=
+$("output").value;
+
+
+if(!value){
+
+alert(
+"先に「掲載用HTMLを作成する」を押してください"
+);
+
+return;
+
+}
+
+
+try{
+
+await navigator.clipboard.writeText(value);
+
+alert(
+"掲載用HTMLをコピーしました！✨"
+);
+
+}
+
+catch(e){
+
+$("output")
+.removeAttribute("readonly");
+
+$("output").select();
+
+document.execCommand("copy");
+
+$("output")
+.setAttribute("readonly","");
+
+alert("コピーしました！");
+
+}
+
+}
+
+
+
+/* =========================
+   リセット
+========================= */
+
+function clearAll(){
+
+$("girlUrl").value="";
+$("girlName").value="";
+$("catchCopy").value="";
+$("size").value="";
+$("schedule").value="";
+$("photo").value="";
+
+
+$("photoPreview").innerHTML=
+
+`
+<p class="note">
+ここをタップして画像を選択してください
+</p>
+`;
+
+
+$("preview").innerHTML=
+
+`
+入力して
+「掲載用HTMLを作成する」
+を押してください
+`;
+
+
+$("output").value="";
+
+$("done").style.display="none";
+
+imageData="";
+
+}
+
+</script>
+
+</body>
+</html>
