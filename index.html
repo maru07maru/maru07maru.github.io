@@ -1,0 +1,1394 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>本日の要チェックGIRL｜掲載HTML作成ツール</title>
+
+<style>
+*{box-sizing:border-box}
+
+body{
+margin:0;
+font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;
+background:linear-gradient(135deg,#efffff,#fff0fb,#f7fff0);
+color:#4b3b52
+}
+
+.wrap{
+max-width:900px;
+margin:auto;
+padding:22px 14px 50px
+}
+
+h1{
+margin:0;
+color:#ff35b7;
+font-size:28px;
+text-align:center
+}
+
+.sub{
+text-align:center;
+color:#777;
+margin:7px 0 22px;
+line-height:1.5
+}
+
+.card{
+background:#fff;
+border:2px solid #ff75ca;
+border-radius:20px;
+padding:18px;
+margin:14px 0;
+box-shadow:0 8px 20px #d8c5dc55
+}
+
+label{
+font-weight:800;
+display:block;
+margin-bottom:8px;
+color:#e51aa2
+}
+
+input,textarea{
+width:100%;
+border:2px solid #d9dce8;
+border-radius:14px;
+padding:13px;
+font-size:15px;
+background:#fff
+}
+
+input:focus,textarea:focus{
+outline:none;
+border-color:#ff55bd
+}
+
+textarea{
+min-height:180px;
+line-height:1.5;
+resize:vertical
+}
+
+button{
+border:0;
+border-radius:14px;
+padding:14px 20px;
+font-size:16px;
+font-weight:800;
+cursor:pointer
+}
+
+.primary{
+background:linear-gradient(90deg,#ff55bd,#a66bff);
+color:#fff;
+width:100%;
+margin-top:12px
+}
+
+.secondary{
+background:#eef2f7;
+color:#555;
+margin-top:10px;
+width:100%
+}
+
+.status{
+margin-top:12px;
+padding:11px 12px;
+border-radius:12px;
+background:#f6f7fa;
+color:#666;
+font-size:13px;
+line-height:1.5
+}
+
+.status.ok{
+background:#effff4;
+color:#16833a
+}
+
+.status.err{
+background:#fff1f1;
+color:#c33
+}
+
+.grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px
+}
+
+.field{
+background:#fff8fd;
+border-radius:12px;
+padding:10px
+}
+
+.field b{
+display:block;
+font-size:12px;
+color:#999;
+margin-bottom:3px
+}
+
+.field span{
+font-weight:700;
+word-break:break-word
+}
+
+.preview{
+background:#fff;
+border-radius:18px;
+padding:16px;
+text-align:center
+}
+
+.preview img{
+max-width:280px;
+max-height:360px;
+object-fit:cover;
+border-radius:14px
+}
+
+.image-list{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:8px;
+margin-top:12px
+}
+
+.image-item{
+border:2px solid #eee;
+border-radius:12px;
+padding:5px;
+background:#fff
+}
+
+.image-item.selected{
+border-color:#ff35b7
+}
+
+.image-item img{
+width:100%;
+height:110px;
+object-fit:cover;
+border-radius:8px
+}
+
+.image-item button{
+width:100%;
+padding:7px;
+font-size:12px;
+margin-top:4px;
+background:#f5f5f7
+}
+
+.small{
+font-size:12px;
+color:#888;
+line-height:1.6
+}
+
+.output{
+min-height:320px;
+font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+font-size:12px
+}
+
+.row{
+display:flex;
+gap:8px;
+margin-top:10px
+}
+
+.row button{
+flex:1
+}
+
+details{
+margin-top:12px
+}
+
+summary{
+font-weight:700;
+color:#777;
+cursor:pointer
+}
+
+@media(max-width:600px){
+
+.grid{
+grid-template-columns:1fr
+}
+
+.image-list{
+grid-template-columns:repeat(2,1fr)
+}
+
+h1{
+font-size:23px
+}
+
+.row{
+flex-direction:column
+}
+
+}
+</style>
+</head>
+
+<body>
+
+<div class="wrap">
+
+<h1>♡ 本日の要チェックGIRL ♡</h1>
+
+<p class="sub">
+掲載ページのURLを貼るだけで、情報を取得して掲載用HTMLを作成
+</p>
+
+
+<div class="card">
+
+<label>① 掲載ページURL</label>
+
+<input
+id="url"
+type="url"
+placeholder="https://www.cityheaven.net/...">
+
+<button
+class="primary"
+onclick="fetchPage()">
+
+URLから情報を取得する
+
+</button>
+
+<div id="status" class="status">
+
+URLを入力して「URLから情報を取得する」を押してください。
+
+</div>
+
+<p class="small">
+
+※ 外部サイトのページを公開プロキシ経由で読み込みます。
+サイト側の制限・ログイン・robots設定などにより取得できないページがあります。
+
+</p>
+
+</div>
+
+
+<div class="card">
+
+<label>② 取得結果（必要なら手直しOK）</label>
+
+<div class="grid">
+
+<div class="field">
+<b>名前・年齢</b>
+<span id="name">—</span>
+</div>
+
+<div class="field">
+<b>スリーサイズ</b>
+<span id="size">—</span>
+</div>
+
+<div class="field">
+<b>出勤時間</b>
+<span id="schedule">—</span>
+</div>
+
+<div class="field">
+<b>キャッチコピー</b>
+<span id="catch">—</span>
+</div>
+
+</div>
+
+
+<div style="margin-top:12px">
+
+<label>名前</label>
+
+<input
+id="editName"
+oninput="updateFromEdits()">
+
+
+<label style="margin-top:10px">
+スリーサイズ
+</label>
+
+<input
+id="editSize"
+oninput="updateFromEdits()">
+
+
+<label style="margin-top:10px">
+出勤時間
+</label>
+
+<input
+id="editSchedule"
+oninput="updateFromEdits()">
+
+
+<label style="margin-top:10px">
+キャッチコピー
+</label>
+
+<input
+id="editCatch"
+oninput="updateFromEdits()">
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<label>③ 画像を選択</label>
+
+<div id="images" class="image-list"></div>
+
+<p id="imageStatus" class="small">
+
+URLを取得すると候補画像が表示されます。
+
+</p>
+
+</div>
+
+
+<div class="card">
+
+<label>④ プレビュー</label>
+
+<div class="preview" id="preview">
+
+情報を取得するとここに表示されます
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<label>⑤ 掲載用HTML</label>
+
+<textarea
+id="output"
+class="output"
+readonly
+placeholder="ここに完成HTMLが表示されます">
+</textarea>
+
+<div class="row">
+
+<button
+class="primary"
+onclick="copyOutput()">
+
+HTMLをコピー
+
+</button>
+
+<button
+class="secondary"
+onclick="openPreview()">
+
+別画面でプレビュー
+
+</button>
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<details>
+
+<summary>
+取得できなかったときの予備機能
+</summary>
+
+<p class="small">
+
+URL取得がサイト側で拒否された場合は、
+ページのHTMLソースを貼り付けて解析できます。
+
+</p>
+
+<textarea
+id="source"
+placeholder="ページのHTMLソースをここに貼り付け">
+</textarea>
+
+<button
+class="secondary"
+onclick="parseSource()">
+
+貼り付けたHTMLを解析する
+
+</button>
+
+</details>
+
+</div>
+
+</div>
+
+
+<script>
+
+let state={
+
+url:"",
+name:"—",
+size:"—",
+schedule:"—",
+catch:"—",
+img:"",
+images:[],
+raw:""
+
+};
+
+
+const $=id=>document.getElementById(id);
+
+
+function clean(s){
+
+return String(s||"")
+.replace(/\u00a0/g," ")
+.replace(/[ \t\r\n]+/g," ")
+.trim();
+
+}
+
+
+function setStatus(msg,type=""){
+
+$("status").className="status "+type;
+
+$("status").textContent=msg;
+
+}
+
+
+function esc(s){
+
+return String(s??"").replace(
+/[&<>"']/g,
+
+m=>({
+
+"&":"&amp;",
+"<":"&lt;",
+">":"&gt;",
+'"':"&quot;",
+"'":"&#39;"
+
+}[m])
+
+);
+
+}
+
+
+function absUrl(u,base){
+
+try{
+
+return new URL(u,base).href;
+
+}catch(e){
+
+return "";
+
+}
+
+}
+
+
+async function fetchWithTimeout(url,ms=20000){
+
+const c=new AbortController();
+
+const t=setTimeout(()=>c.abort(),ms);
+
+try{
+
+const r=await fetch(
+
+url,
+
+{
+
+signal:c.signal,
+
+headers:{
+
+"Accept":"text/plain,text/html,*/*"
+
+}
+
+}
+
+);
+
+if(!r.ok){
+
+throw new Error("HTTP "+r.status);
+
+}
+
+return await r.text();
+
+}
+
+finally{
+
+clearTimeout(t);
+
+}
+
+}
+
+
+async function fetchPage(){
+
+const target=$("url").value.trim();
+
+if(!target){
+
+setStatus(
+"URLを入力してください",
+"err"
+);
+
+return;
+
+}
+
+
+try{
+
+new URL(target);
+
+}catch(e){
+
+setStatus(
+"URLの形式が正しくありません",
+"err"
+);
+
+return;
+
+}
+
+
+state.url=target;
+
+setStatus(
+"ページを取得しています…少し待ってください"
+);
+
+
+const encoded=encodeURIComponent(target);
+
+const proxies=[
+
+"https://r.jina.ai/"+target,
+
+"https://api.allorigins.win/raw?url="+encoded
+
+];
+
+
+let raw="";
+
+
+for(let i=0;i<proxies.length;i++){
+
+try{
+
+raw=await fetchWithTimeout(
+proxies[i],
+22000
+);
+
+if(raw && raw.length>80){
+
+break;
+
+}
+
+}catch(e){}
+
+}
+
+
+if(!raw){
+
+setStatus(
+
+"ページを取得できませんでした。サイト側のアクセス制限の可能性があります。下の「予備機能」からHTMLを貼り付ける方法も使えます。",
+
+"err"
+
+);
+
+return;
+
+}
+
+
+state.raw=raw;
+
+parseContent(raw,target);
+
+
+setStatus(
+
+"取得完了！見つかった情報を自動入力しました。必要なら下の項目を修正できます。",
+
+"ok"
+
+);
+
+}
+
+
+function parseSource(){
+
+const raw=$("source").value;
+
+if(!raw.trim()){
+
+setStatus(
+"HTMLソースを貼り付けてください",
+"err"
+);
+
+return;
+
+}
+
+
+state.raw=raw;
+
+parseContent(
+raw,
+state.url||""
+);
+
+
+setStatus(
+"HTMLソースを解析しました。",
+"ok"
+);
+
+}
+
+
+function parseContent(raw,baseUrl){
+
+const isHtml=/<(?:html|body|img|a|div|span|meta)[\s>]/i.test(raw);
+
+let text="";
+
+let images=[];
+
+let title="";
+
+
+if(isHtml){
+
+const doc=new DOMParser()
+.parseFromString(raw,"text/html");
+
+
+title=clean(doc.title||"");
+
+text=clean(
+doc.body?.innerText||
+doc.documentElement?.innerText||
+""
+);
+
+
+images=[
+
+...doc.querySelectorAll(
+"img[src],img[data-src],img[data-original],source[srcset]"
+)
+
+]
+
+.map(x=>
+
+x.getAttribute("src")||
+
+x.getAttribute("data-src")||
+
+x.getAttribute("data-original")||
+
+(
+
+x.getAttribute("srcset")||""
+
+)
+
+.split(",")[0]
+
+?.trim()
+
+.split(" ")[0]
+
+)
+
+.map(x=>absUrl(x,baseUrl))
+
+.filter(Boolean);
+
+}else{
+
+text=clean(raw);
+
+title=(raw.match(
+/^#\s+(.+)$/m
+)||[])[1]||"";
+
+
+const mdImgs=[
+
+...raw.matchAll(
+/!\[[^\]]*\]\((https?:\/\/[^\s)]+)(?:\s+[^)]*)?\)/g
+)
+
+].map(m=>m[1]);
+
+
+const plainImgs=[
+
+...raw.matchAll(
+/https?:\/\/[^\s)]+\.(?:jpg|jpeg|png|webp)(?:\?[^\s)]*)?/ig
+)
+
+].map(
+
+m=>m[0].replace(/[),]+$/,"")
+
+);
+
+
+images=mdImgs.concat(
+plainImgs
+);
+
+}
+
+
+images=[...new Set(images)]
+
+.filter(u=>
+
+!/(logo|icon|favicon|sprite|qr|banner|google|facebook|twitter)/i
+.test(u)
+
+)
+
+.slice(0,18);
+
+
+state.images=images;
+
+
+const all=(title+" "+text)
+.replace(/\s+/g," ");
+
+
+state.name=findName(
+all,
+title
+);
+
+state.size=findSize(all);
+
+state.schedule=findSchedule(all);
+
+state.catch=findCatch(
+all,
+state.name
+);
+
+
+$("editName").value=
+state.name==="—"?"":state.name;
+
+$("editSize").value=
+state.size==="—"?"":state.size;
+
+$("editSchedule").value=
+state.schedule==="—"?"":state.schedule;
+
+$("editCatch").value=
+state.catch==="—"?"":state.catch;
+
+
+renderImages();
+
+updateUI();
+
+}
+
+
+function findName(text,title){
+
+const patterns=[
+
+/(?:名前|女の子|キャスト|プロフィール)\s*[:：]?\s*([\p{L}\p{N}ぁ-んァ-ヶ一-龥々ー・]{1,24})\s*(?:（\s*(\d{1,2})\s*歳?[）)])?/iu,
+
+/([\p{L}\p{N}ぁ-んァ-ヶ一-龥々ー・]{2,20})\s*[（(]\s*(\d{1,2})\s*歳?[)）]/iu,
+
+/([\p{L}\p{N}ぁ-んァ-ヶ一-龥々ー・]{2,20})\s*(\d{1,2})\s*歳/iu
+
+];
+
+
+for(const p of patterns){
+
+const m=text.match(p);
+
+if(m){
+
+const n=clean(m[1]);
+
+if(
+
+n&&
+!/料金|出勤|コース|プロフィール|女の子|キャスト/.test(n)
+
+){
+
+return m[2]
+?n+" ("+m[2]+"歳)"
+:n;
+
+}
+
+}
+
+}
+
+
+const t=clean(title);
+
+const tm=t.match(
+/([^｜|\-]{2,24})\s*(?:｜|\||-|–|—)/
+);
+
+
+return tm
+?clean(tm[1])
+:"—";
+
+}
+
+
+function findSize(text){
+
+const p=[
+
+/T\s*([0-9]{2,3})\s*B\s*([0-9]{2,3})\s*(?:\(([^)]*)\))?\s*W\s*([0-9]{2,3})\s*H\s*([0-9]{2,3})/i,
+
+/B\s*([0-9]{2,3})\s*(?:\(([^)]*)\))?\s*W\s*([0-9]{2,3})\s*H\s*([0-9]{2,3})/i,
+
+/バスト\s*([0-9]{2,3}).{0,20}?ウエスト\s*([0-9]{2,3}).{0,20}?ヒップ\s*([0-9]{2,3})/i
+
+];
+
+
+for(const r of p){
+
+const m=text.match(r);
+
+if(m){
+
+if(r===p[0]){
+
+return
+
+"T"+m[1]+
+" B"+m[2]+
+(m[3]?"("+m[3]+")":"")+
+" W"+m[4]+
+" H"+m[5];
+
+}
+
+
+if(r===p[1]){
+
+return
+
+"B"+m[1]+
+(m[2]?"("+m[2]+")":"")+
+" W"+m[3]+
+" H"+m[4];
+
+}
+
+
+return
+
+"B"+m[1]+
+" W"+m[2]+
+" H"+m[3];
+
+}
+
+}
+
+
+return "—";
+
+}
+
+
+function findSchedule(text){
+
+const patterns=[
+
+/(?:出勤時間|出勤|勤務時間|受付時間)\s*[:：]?\s*(\d{1,2}[:：]\d{2})\s*[～〜~\-－ー]\s*(\d{1,2}[:：]\d{2})/,
+
+/(\d{1,2}[:：]\d{2})\s*[～〜~\-－ー]\s*(\d{1,2}[:：]\d{2})\s*(?:出勤|勤務)/i,
+
+/(\d{1,2}[:：]\d{2})\s*[～〜~\-－ー]\s*(\d{1,2}[:：]\d{2})/
+
+];
+
+
+for(const p of patterns){
+
+const m=text.match(p);
+
+if(m){
+
+return
+
+m[1].replace("：",":")+
+"～"+
+m[2].replace("：",":");
+
+}
+
+}
+
+
+return "—";
+
+}
+
+
+function findCatch(text,name){
+
+const bad=/料金|コース|出勤|受付|プロフィール|アクセス|口コミ|オプション|円|TEL|電話|営業時間|スリーサイズ|T\d/i;
+
+
+const parts=text
+
+.split(/[。！？!?｜|]/)
+
+.map(clean)
+
+.filter(x=>
+
+x.length>=8&&
+x.length<=90&&
+!bad.test(x)
+
+);
+
+
+const keys=[
+
+"美人",
+"美少女",
+"美女",
+"可愛い",
+"かわいい",
+"清楚",
+"スタイル",
+"アイドル",
+"モデル",
+"癒し",
+"愛嬌",
+"色白",
+"人気",
+"新人",
+"おすすめ",
+"ルックス",
+"笑顔",
+"素敵"
+
+];
+
+
+const hit=parts.find(x=>
+
+keys.some(k=>x.includes(k))
+
+&&
+
+(!name||!x.includes("プロフィール"))
+
+);
+
+
+return hit||
+parts.find(x=>x.length>=12)||
+"—";
+
+}
+
+
+function renderImages(){
+
+const box=$("images");
+
+
+if(!state.images.length){
+
+box.innerHTML="";
+
+$("imageStatus").textContent=
+"画像候補が見つかりませんでした。";
+
+state.img="";
+
+updatePreview();
+
+return;
+
+}
+
+
+$("imageStatus").textContent=
+
+state.images.length+
+"枚の画像候補が見つかりました。使う画像をタップしてください。";
+
+
+box.innerHTML=
+
+state.images.map((u,i)=>`
+
+<div class="image-item ${i===0?"selected":""}" id="im${i}">
+
+<img
+src="${esc(u)}"
+onerror="this.style.opacity=.25">
+
+<button
+onclick="selectImage(${i})">
+
+${i===0
+?"選択中"
+:"この画像を使う"}
+
+</button>
+
+</div>
+
+`).join("");
+
+
+state.img=
+state.images[0]||"";
+
+}
+
+
+function selectImage(i){
+
+state.img=
+state.images[i]||"";
+
+
+[...document.querySelectorAll(
+".image-item"
+)]
+
+.forEach((x,n)=>{
+
+x.classList.toggle(
+"selected",
+n===i
+);
+
+
+const b=x.querySelector(
+"button"
+);
+
+
+if(b){
+
+b.textContent=
+n===i
+?"選択中"
+:"この画像を使う";
+
+}
+
+});
+
+
+updatePreview();
+
+makeOutput();
+
+}
+
+
+function updateFromEdits(){
+
+state.name=
+$("editName").value.trim()||
+"—";
+
+state.size=
+$("editSize").value.trim()||
+"—";
+
+state.schedule=
+$("editSchedule").value.trim()||
+"—";
+
+state.catch=
+$("editCatch").value.trim()||
+"—";
+
+
+updateUI();
+
+}
+
+
+function updateUI(){
+
+$("name").textContent=
+state.name;
+
+$("size").textContent=
+state.size;
+
+$("schedule").textContent=
+state.schedule;
+
+$("catch").textContent=
+state.catch;
+
+
+updatePreview();
+
+makeOutput();
+
+}
+
+
+function updatePreview(){
+
+$("preview").innerHTML=`
+
+${state.img
+?`<img src="${esc(state.img)}" alt="">`
+:""}
+
+<h2
+style="color:#ff00aa;margin:10px 0 4px">
+
+${esc(state.name)}
+
+</h2>
+
+<div
+style="color:#ff00aa;font-weight:800">
+
+${esc(state.catch)}
+
+</div>
+
+<div
+style="color:#ff00aa;font-weight:800;margin-top:6px">
+
+${esc(state.size)}
+
+</div>
+
+<div
+style="color:#ff00aa;font-weight:800;margin-top:6px">
+
+出勤時間 ${esc(state.schedule)}
+
+</div>
+
+`;
+
+}
+
+
+function makeOutput(){
+
+const html=
+
+`<div style="text-align:center;background:#fff4fc;border:1px solid #2dc7ff;padding:18px;border-radius:16px;margin:12px 0;">
+
+<a
+href="${esc(state.url||"#")}"
+style="text-decoration:none;color:#ff00aa;font-weight:bold;">
+
+${state.img
+
+?`<img
+src="${esc(state.img)}"
+style="max-width:320px;width:100%;height:auto;border-radius:12px;"><br>`
+
+:""}
+
+<span style="font-size:22px;">
+
+${esc(state.name)}
+
+</span><br>
+
+<span style="font-size:18px;">
+
+${esc(state.catch)}
+
+</span><br>
+
+<span style="font-size:18px;">
+
+${esc(state.size)}
+
+</span><br>
+
+<span style="font-size:18px;">
+
+出勤時間 ${esc(state.schedule)}
+
+</span>
+
+</a>
+
+</div>`;
+
+
+$("output").value=html;
+
+}
+
+
+async function copyOutput(){
+
+const v=$("output").value;
+
+
+if(!v){
+
+alert(
+"先に情報を取得してください"
+);
+
+return;
+
+}
+
+
+try{
+
+await navigator.clipboard.writeText(v);
+
+alert(
+"掲載用HTMLをコピーしました！"
+);
+
+}
+
+catch(e){
+
+$("output").removeAttribute(
+"readonly"
+);
+
+$("output").select();
+
+document.execCommand("copy");
+
+$("output").setAttribute(
+"readonly",
+""
+);
+
+alert("コピーしました！");
+
+}
+
+}
+
+
+function openPreview(){
+
+const w=
+window.open("","_blank");
+
+
+if(!w){
+
+alert(
+"ポップアップがブロックされています。"
+);
+
+return;
+
+}
+
+
+w.document.write(
+
+"<!doctype html>"+
+"<html lang='ja'>"+
+"<head>"+
+"<meta charset='utf-8'>"+
+"<title>掲載プレビュー</title>"+
+"</head>"+
+"<body>"+
+$("output").value+
+"</body>"+
+"</html>"
+
+);
+
+
+w.document.close();
+
+}
+
+</script>
+
+</body>
+</html>
