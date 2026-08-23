@@ -1,386 +1,268 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ja">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
 
-<title>♡ 本日の要チェックGIRL ♡｜掲載HTMLメーカー</title>
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>掲載HTML作成ツール</title>
 
 <style>
+
 *{
-  box-sizing:border-box;
+box-sizing:border-box;
 }
 
 body{
-  margin:0;
-  font-family:-apple-system,BlinkMacSystemFont,
-  "Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;
-  background:linear-gradient(135deg,#efffff,#fff0fb,#f7fff0);
-  color:#4b3b52;
+margin:0;
+padding:0;
+font-family:
+-apple-system,
+BlinkMacSystemFont,
+"Hiragino Kaku Gothic ProN",
+"Yu Gothic",
+Meiryo,
+sans-serif;
+
+background:
+linear-gradient(
+135deg,
+#efffff,
+#fff0fb,
+#f7fff0
+);
+
+color:#555;
 }
 
-.wrap{
-  max-width:760px;
-  margin:auto;
-  padding:20px 14px 50px;
+.container{
+max-width:900px;
+margin:0 auto;
+padding:20px 14px 50px;
 }
 
 h1{
-  text-align:center;
-  color:#ff35b7;
-  font-size:27px;
-  margin:4px 0 6px;
+text-align:center;
+margin:0;
+color:#ff35b7;
+font-size:26px;
 }
 
-.sub{
-  text-align:center;
-  color:#777;
-  margin:0 0 20px;
+.subtitle{
+text-align:center;
+font-size:13px;
+color:#888;
+margin:8px 0 20px;
 }
 
-.card{
-  background:#fff;
-  border:2px solid #ff75ca;
-  border-radius:20px;
-  padding:18px;
-  margin:14px 0;
-  box-shadow:0 8px 20px #d8c5dc55;
+.box{
+background:#fff;
+border:2px solid #ff75ca;
+border-radius:20px;
+padding:18px;
+margin-bottom:16px;
+box-shadow:
+0 8px 20px rgba(180,130,180,.15);
 }
 
-.step{
-  display:inline-block;
-  background:linear-gradient(90deg,#ff55bd,#a66bff);
-  color:#fff;
-  border-radius:999px;
-  padding:5px 11px;
-  font-size:12px;
-  font-weight:800;
-  margin-bottom:10px;
+.title{
+font-size:17px;
+font-weight:bold;
+color:#e51aa2;
+margin-bottom:10px;
 }
 
-label{
-  display:block;
-  font-weight:800;
-  color:#e51aa2;
-  margin:12px 0 7px;
+.explain{
+background:#fff8fd;
+border-radius:12px;
+padding:12px;
+font-size:13px;
+line-height:1.7;
+margin-bottom:12px;
 }
 
-input,
 textarea{
-  width:100%;
-  border:2px solid #dddde8;
-  border-radius:13px;
-  padding:12px;
-  font-size:15px;
-  background:#fff;
+width:100%;
+min-height:280px;
+
+padding:14px;
+
+border:
+2px dashed #55c9ee;
+
+border-radius:14px;
+
+font-size:14px;
+
+line-height:1.6;
+
+font-family:
+-apple-system,
+BlinkMacSystemFont,
+"Hiragino Kaku Gothic ProN",
+"Yu Gothic",
+Meiryo,
+sans-serif;
+
+resize:vertical;
+
+background:#fcffff;
+
+outline:none;
 }
 
-input:focus,
 textarea:focus{
-  outline:none;
-  border-color:#ff55bd;
-}
-
-textarea{
-  min-height:80px;
-  resize:vertical;
-}
-
-.row{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px;
-}
-
-.photo-box{
-  border:2px dashed #55c9ee;
-  border-radius:15px;
-  padding:15px;
-  text-align:center;
-  background:#f8ffff;
-}
-
-input[type=file]{
-  border:0;
-  padding:8px;
-  background:transparent;
-}
-
-.photo-preview{
-  margin-top:10px;
-}
-
-.photo-preview img{
-  max-width:280px;
-  max-height:330px;
-  border-radius:13px;
-  object-fit:cover;
+border-color:#ff69c4;
 }
 
 button{
-  width:100%;
-  border:0;
-  border-radius:14px;
-  padding:14px;
-  font-size:16px;
-  font-weight:800;
-  cursor:pointer;
+
+width:100%;
+
+border:0;
+
+border-radius:14px;
+
+padding:15px;
+
+margin-top:12px;
+
+font-size:16px;
+
+font-weight:bold;
+
+cursor:pointer;
+
 }
 
-.main{
-  background:linear-gradient(90deg,#ff55bd,#a66bff);
-  color:#fff;
-  margin-top:15px;
+.create{
+background:
+linear-gradient(
+90deg,
+#ff55bd,
+#a66bff
+);
+
+color:#fff;
 }
 
 .copy{
-  background:#ff4fba;
-  color:#fff;
+background:#55c9ee;
+color:#fff;
 }
 
-.clear{
-  background:#f0f1f5;
-  color:#666;
-  margin-top:8px;
-}
+.message{
 
-.preview{
-  background:#fff;
-  border-radius:16px;
-  padding:16px;
-  text-align:center;
-  border:1px solid #eee;
-}
+display:none;
 
-.preview img{
-  max-width:320px;
-  width:100%;
-  height:auto;
-  border-radius:12px;
-}
+margin-top:10px;
 
-.output{
-  min-height:360px;
-  font-family:ui-monospace,monospace;
-  font-size:12px;
+padding:10px;
+
+border-radius:10px;
+
+text-align:center;
+
+font-size:13px;
+
+font-weight:bold;
+
+background:#edfff7;
+
+color:#18a66d;
+
 }
 
 .note{
-  font-size:12px;
-  color:#888;
-  line-height:1.6;
-}
 
-.done{
-  display:none;
-  background:#effff4;
-  color:#16833a;
-  padding:12px;
-  border-radius:12px;
-  margin-top:10px;
-  font-weight:700;
-}
+font-size:11px;
 
-@media(max-width:600px){
+color:#999;
 
-  .row{
-    grid-template-columns:1fr;
-  }
+line-height:1.6;
 
-  h1{
-    font-size:23px;
-  }
+margin-top:10px;
 
 }
+
 </style>
+
 </head>
 
 
 <body>
 
-<div class="wrap">
 
-<h1>♡ 本日の要チェックGIRL ♡</h1>
-
-<p class="sub">
-入力して、画像を選ぶだけ。<br>
-掲載用HTMLを一発作成！
-</p>
+<div class="container">
 
 
-<!-- STEP 1 -->
+<h1>
+♡ 掲載HTML作成ツール ♡
+</h1>
 
-<div class="card">
 
-<span class="step">STEP 1</span>
+<div class="subtitle">
+抽出したHTMLを貼り付けるだけ
+</div>
 
-<label>女の子ページURL</label>
 
-<input
-id="girlUrl"
-type="url"
-placeholder="https://www.cityheaven.net/..."
->
+<div class="box">
 
-<p class="note">
-女の子のページをクリックできるようにするためのURLです。
-</p>
+
+<div class="title">
+① ここに抽出HTMLを貼り付け
+</div>
+
+
+<div class="explain">
+
+ここに<strong>抽出したHTMLをそのまま貼り付けてください。</strong>
+
+<br>
+
+難しい操作は必要ありません。
+
+<br>
+
+女の子4名分まで自動で読み取って、掲載用HTMLを作成します。
 
 </div>
 
 
-<!-- STEP 2 -->
+<textarea
+id="source"
+placeholder="★★★ ここに抽出HTMLを貼り付け ★★★"
+></textarea>
 
-<div class="card">
-
-<span class="step">STEP 2</span>
-
-<label>名前・年齢</label>
-
-<input
-id="girlName"
-placeholder="例：すみれ (22)"
->
-
-
-<label>キャッチコピー</label>
-
-<input
-id="catchCopy"
-placeholder="例：高身長スレンダー美女‼"
->
-
-
-<div class="row">
-
-<div>
-
-<label>スリーサイズ</label>
-
-<input
-id="size"
-placeholder="例：T163 B87(C) W55 H86"
->
-
-</div>
-
-
-<div>
-
-<label>出勤時間</label>
-
-<input
-id="schedule"
-placeholder="例：09:30～19:00"
->
-
-</div>
-
-</div>
-
-</div>
-
-
-<!-- STEP 3 -->
-
-<div class="card">
-
-<span class="step">STEP 3</span>
-
-<label>女の子の画像</label>
-
-
-<div class="photo-box">
-
-<input
-id="photo"
-type="file"
-accept="image/*"
->
-
-<div
-class="photo-preview"
-id="photoPreview"
->
-
-<p class="note">
-ここをタップして画像を選択してください
-</p>
-
-</div>
-
-</div>
-
-<p class="note">
-iPhoneの写真から選択できます。
-</p>
-
-</div>
-
-
-<!-- STEP 4 -->
-
-<div class="card">
-
-<span class="step">STEP 4</span>
 
 <button
-class="main"
-onclick="makePage()"
+class="create"
+onclick="createHTML()"
 >
 
-✨ 掲載用HTMLを作成する
+掲載用HTMLを作成する
 
 </button>
 
 
-<div
-id="done"
-class="done"
->
-
-✓ 完成！下のHTMLをコピーしてください。
-
-</div>
-
 </div>
 
 
-<!-- PREVIEW -->
 
-<div class="card">
+<div class="box">
 
-<span class="step">PREVIEW</span>
 
-<div
-class="preview"
-id="preview"
->
-
-入力して
-「掲載用HTMLを作成する」
-を押してください
-
+<div class="title">
+② 作成された掲載用HTML
 </div>
-
-</div>
-
-
-<!-- HTML -->
-
-<div class="card">
-
-<span class="step">COPY</span>
-
-<label>
-掲載用HTML
-</label>
 
 
 <textarea
-id="output"
-class="output"
+id="result"
 readonly
+placeholder="ここに完成した掲載用HTMLが表示されます"
 ></textarea>
 
 
@@ -389,432 +271,737 @@ class="copy"
 onclick="copyHTML()"
 >
 
-📋 HTMLをコピー
+掲載用HTMLをコピー
 
 </button>
 
 
-<button
-class="clear"
-onclick="clearAll()"
+<div
+id="message"
+class="message"
 >
 
-入力をリセット
+♡ コピーしました！
 
-</button>
+</div>
+
+
+<div class="note">
+
+※ 生成されるHTMLは、CityHeavenで使用できる基本タグを中心に構成します。
+
+<br>
+
+※ 「本日の要チェックGIRL」「PICK UP GIRL」などの固定タイトルは生成されません。
 
 </div>
 
 
 </div>
+
+
+</div>
+
 
 
 <script>
 
-let imageData="";
+
+/* ==========================================
+   基本処理
+========================================== */
 
 
-const $ = id =>
-document.getElementById(id);
+function cleanText(text){
 
-
-
-/* =========================
-   画像選択
-========================= */
-
-$("photo").addEventListener(
-"change",
-function(){
-
-const file=this.files[0];
-
-if(!file){
-return;
-}
-
-if(!file.type.startsWith("image/")){
-
-alert("画像ファイルを選択してください");
-
-return;
+return String(text || "")
+.replace(/\s+/g," ")
+.trim();
 
 }
 
 
-const reader=new FileReader();
+function escapeHTML(text){
+
+return String(text || "")
+
+.replace(/&/g,"&amp;")
+
+.replace(/</g,"&lt;")
+
+.replace(/>/g,"&gt;")
+
+.replace(/"/g,"&quot;")
+
+.replace(/'/g,"&#39;");
+
+}
 
 
-reader.onload=function(e){
-
-imageData=e.target.result;
-
-
-$("photoPreview").innerHTML=
-
-'<img src="' +
-imageData +
-'" alt="">';
-
-};
+/* ==========================================
+   HTMLを解析
+========================================== */
 
 
-reader.readAsDataURL(file);
+function getGirls(source){
+
+const parser =
+new DOMParser();
+
+const doc =
+parser.parseFromString(
+source,
+"text/html"
+);
+
+
+/* ------------------------------------------
+   本文
+------------------------------------------ */
+
+const bodyText =
+cleanText(
+doc.body.innerText || ""
+);
+
+
+/* ------------------------------------------
+   女の子ページURL
+------------------------------------------ */
+
+const links = [
+
+...doc.querySelectorAll("a[href]")
+
+]
+
+.map(function(a){
+
+return a.getAttribute("href");
+
+})
+
+.filter(function(url){
+
+return url &&
+url !== "#" &&
+!url.startsWith("javascript:");
 
 });
 
 
+/* ------------------------------------------
+   画像URL
+------------------------------------------ */
 
-/* =========================
-   HTMLエスケープ
-========================= */
+const images = [
 
-function esc(value){
+...doc.querySelectorAll("img[src]")
 
-return String(value || "")
-.replace(
-/[&<>"']/g,
-function(match){
+]
 
-return {
+.map(function(img){
 
-"&":"&amp;",
-"<":"&lt;",
-">":"&gt;",
-'"':"&quot;",
-"'":"&#39;"
+return img.getAttribute("src");
 
-}[match];
+})
 
-}
+.filter(function(url){
+
+return url &&
+!url.startsWith("data:");
+
+});
+
+
+/* ------------------------------------------
+   名前・年齢
+------------------------------------------ */
+
+const names = [
+
+...bodyText.matchAll(
+
+/([^\d\s（）()]{1,15})\s*[（(]\s*(\d{1,2})\s*[）)]/g
+
+)
+
+];
+
+
+/* ------------------------------------------
+   スリーサイズ
+------------------------------------------ */
+
+const sizes = [
+
+...bodyText.matchAll(
+
+/T\s*:?\s*\d{2,3}\s*B\s*:?\s*\d{2,3}(?:\([A-Z]\))?\s*W\s*:?\s*\d{2,3}\s*H\s*:?\s*\d{2,3}/gi
+
+)
+
+];
+
+
+/* ------------------------------------------
+   出勤時間
+------------------------------------------ */
+
+const schedules = [
+
+...bodyText.matchAll(
+
+/出勤時間\s*[:：]?\s*(\d{1,2}:\d{2})\s*[～〜-]\s*(\d{1,2}:\d{2})/g
+
+)
+
+];
+
+
+/* ------------------------------------------
+   キャッチコピー
+------------------------------------------ */
+
+const elements = [
+
+...doc.querySelectorAll(
+"div,span,p,strong,b,a"
+)
+
+];
+
+
+const candidateTexts = elements
+
+.map(function(el){
+
+return cleanText(
+el.innerText
+);
+
+})
+
+.filter(function(text){
+
+return text.length >= 5 &&
+text.length <= 80;
+
+});
+
+
+const keywords = [
+
+"美女",
+"美少女",
+"スタイル",
+"ルックス",
+"モデル",
+"アイドル",
+"清楚",
+"愛嬌",
+"クラス",
+"ホスピタリティ",
+"パイパン",
+"抜群",
+"可愛い",
+"かわいい",
+"美人"
+
+];
+
+
+const catches =
+candidateTexts.filter(function(text){
+
+return keywords.some(function(keyword){
+
+return text.includes(keyword);
+
+})
+
+&&
+
+!text.includes("出勤時間")
+
+&&
+
+!/^T\s*\d/i.test(text);
+
+});
+
+
+/* ------------------------------------------
+   何人取得するか
+------------------------------------------ */
+
+const count =
+Math.min(
+
+4,
+
+Math.max(
+
+names.length,
+
+sizes.length,
+
+schedules.length,
+
+images.length
+
+)
+
+);
+
+
+/* ------------------------------------------
+   女の子情報
+------------------------------------------ */
+
+const girls = [];
+
+
+for(
+let i=0;
+i<count;
+i++
+){
+
+
+let name = "";
+
+let age = "";
+
+
+if(names[i]){
+
+name =
+cleanText(
+names[i][1]
+);
+
+age =
+cleanText(
+names[i][2]
 );
 
 }
 
 
-
-/* =========================
-   掲載HTML作成
-========================= */
-
-function makePage(){
-
-const url=
-$("girlUrl").value.trim() || "#";
-
-const name=
-$("girlName").value.trim()
-|| "女の子の名前";
-
-const catchCopy=
-$("catchCopy").value.trim()
-|| "本日のおすすめGIRL";
-
-const size=
-$("size").value.trim()
-|| "スリーサイズ";
-
-const schedule=
-$("schedule").value.trim()
-|| "出勤時間";
+let size = "";
 
 
+if(sizes[i]){
 
-/* プレビュー */
-
-$("preview").innerHTML=`
-
-<div
-style="
-border:1px dotted #2dc7ff;
-box-shadow:0 6px 7px #90bfd1;
-padding:18px;
-border-radius:14px;
-background:
-linear-gradient(
-40deg,
-#d1ffff,
-#ffedfc 25%,
-#fcffed 50%,
-#ffedfc 75%,
-#d1ffff
+size =
+cleanText(
+sizes[i][0]
 );
-"
->
 
-<div
-style="
-color:#ff00ff;
-font-size:22px;
-font-weight:bold;
-margin-bottom:12px;
-"
->
-
-♡本日の要チェックGIRL♡
-
-</div>
-
-
-${
-imageData
-?
-`
-<img
-src="${imageData}"
-style="
-display:block;
-max-width:360px;
-width:100%;
-height:auto;
-margin:0 auto 10px;
-border-radius:12px;
-"
->
-`
-:
-""
 }
 
 
-<div
-style="
-color:#ff00ff;
-font-size:22px;
-font-weight:bold;
-"
->
-
-${esc(name)}
-
-</div>
+let schedule = "";
 
 
-<div
-style="
-color:#ff00ff;
-font-size:18px;
-font-weight:bold;
-margin-top:5px;
-"
->
+if(schedules[i]){
 
-${esc(catchCopy)}
+schedule =
+schedules[i][1]
++
+"～"
++
+schedules[i][2];
 
-</div>
+}
 
 
-<div
-style="
-color:#ff00ff;
-font-size:18px;
-font-weight:bold;
-margin-top:5px;
-"
->
-
-${esc(size)}
-
-</div>
+let catchCopy = "";
 
 
-<div
-style="
-color:#ff00ff;
-font-size:18px;
-font-weight:bold;
-margin-top:5px;
-"
->
+if(catches[i]){
 
-出勤時間 ${esc(schedule)}
+catchCopy =
+cleanText(
+catches[i]
+);
 
-</div>
-
-</div>
-
-`;
+}
 
 
+let url = "";
 
-/* =========================
+
+if(links[i]){
+
+url =
+links[i];
+
+}
+
+
+let image = "";
+
+
+if(images[i]){
+
+image =
+images[i];
+
+}
+
+
+girls.push({
+
+name:name,
+
+age:age,
+
+size:size,
+
+schedule:schedule,
+
+catchCopy:catchCopy,
+
+url:url,
+
+image:image
+
+});
+
+}
+
+
+/* ------------------------------------------
+   取得できなかった場合
+------------------------------------------ */
+
+if(girls.length === 0){
+
+girls.push({
+
+name:"",
+
+age:"",
+
+size:"",
+
+schedule:"",
+
+catchCopy:"",
+
+url:"",
+
+image:""
+
+});
+
+}
+
+
+return girls.slice(
+0,
+4
+);
+
+}
+
+
+/* ==========================================
+   1人分のHTML
+========================================== */
+
+
+function makeGirlHTML(girl){
+
+
+let html = "";
+
+
+/* 外枠 */
+
+html += '<div>';
+
+
+/* URL */
+
+if(girl.url){
+
+html +=
+'<a href="' +
+escapeHTML(girl.url) +
+'">';
+
+}
+
+
+/* 画像 */
+
+if(girl.image){
+
+html +=
+
+'<div style="text-align:center;">' +
+
+'<img src="' +
+escapeHTML(girl.image) +
+'" width="260" height="350">' +
+
+'</div>';
+
+}
+
+
+/* 名前 */
+
+if(girl.name){
+
+html +=
+
+'<p style="text-align:center;">' +
+
+'<strong>' +
+
+'<font color="#ff00aa">' +
+
+escapeHTML(girl.name);
+
+
+if(girl.age){
+
+html +=
+
+' (' +
+escapeHTML(girl.age) +
+')';
+
+}
+
+
+html +=
+
+'</font>' +
+
+'</strong>' +
+
+'</p>';
+
+}
+
+
+/* キャッチコピー */
+
+if(girl.catchCopy){
+
+html +=
+
+'<p style="text-align:center;">' +
+
+'<strong>' +
+
+'<font color="#ff55bb">' +
+
+escapeHTML(
+girl.catchCopy
+) +
+
+'</font>' +
+
+'</strong>' +
+
+'</p>';
+
+}
+
+
+/* スリーサイズ */
+
+if(girl.size){
+
+html +=
+
+'<p style="text-align:center;">' +
+
+'<strong>' +
+
+'<font color="#777777">' +
+
+escapeHTML(
+girl.size
+) +
+
+'</font>' +
+
+'</strong>' +
+
+'</p>';
+
+}
+
+
+/* 出勤 */
+
+if(girl.schedule){
+
+html +=
+
+'<p style="text-align:center;">' +
+
+'<strong>' +
+
+'<font color="#ff00aa">' +
+
+'出勤 ' +
+
+escapeHTML(
+girl.schedule
+) +
+
+'</font>' +
+
+'</strong>' +
+
+'</p>';
+
+}
+
+
+/* URL終了 */
+
+if(girl.url){
+
+html +=
+'</a>';
+
+}
+
+
+/* 区切り */
+
+html +=
+
+'<hr>';
+
+
+/* 外枠終了 */
+
+html +=
+'</div>';
+
+
+return html;
+
+}
+
+
+/* ==========================================
    完成HTML
-========================= */
+========================================== */
 
-const html =
 
-`
-<div
-style="
-border:1px dotted #2dc7ff;
-box-shadow:0 6px 7px #90bfd1;
-"
->
+function makeCompleteHTML(girls){
 
-<div
-style="
-background:
-linear-gradient(
-40deg,
-#d1ffff,
-#ffedfc 25%,
-#fcffed 50%,
-#ffedfc 75%,
-#d1ffff
+
+let html = "";
+
+
+html +=
+'<div>';
+
+
+for(
+let i=0;
+i<girls.length;
+i++
+){
+
+html +=
+makeGirlHTML(
+girls[i]
 );
-text-align:center;
-padding:18px;
-"
->
-
-<div
-style="
-background:
-radial-gradient(
-rgba(43,216,255,.1) 10%,
-transparent 20%
-),
-radial-gradient(
-rgba(255,127,235,.1) 10%,
-transparent 20%
-);
-background-size:40px 40px;
-background-position:0 0,20px 20px;
-padding:15px;
-"
->
-
-
-<div
-style="
-color:#ff00ff;
-font-size:22px;
-font-weight:bold;
-margin-bottom:12px;
-"
->
-
-♡本日の要チェックGIRL♡
-
-</div>
-
-
-<a
-href="${esc(url)}"
-style="
-text-decoration:none;
-color:#ff00ff;
-"
->
-
-
-${
-imageData
-?
-`
-<img
-src="${imageData}"
-alt=""
-style="
-display:block;
-max-width:360px;
-width:100%;
-height:auto;
-margin:0 auto 10px;
-border-radius:12px;
-"
->
-`
-:
-""
-}
-
-
-<div
-style="
-font-size:22px;
-font-weight:bold;
-"
->
-
-${esc(name)}
-
-</div>
-
-
-<div
-style="
-font-size:18px;
-font-weight:bold;
-margin-top:5px;
-"
->
-
-${esc(catchCopy)}
-
-</div>
-
-
-<div
-style="
-font-size:18px;
-font-weight:bold;
-margin-top:5px;
-"
->
-
-${esc(size)}
-
-</div>
-
-
-<div
-style="
-font-size:18px;
-font-weight:bold;
-margin-top:5px;
-"
->
-
-出勤時間 ${esc(schedule)}
-
-</div>
-
-
-</a>
-
-
-</div>
-
-</div>
-
-</div>
-`;
-
-
-
-$("output").value=html;
-
-$("done").style.display="block";
 
 }
 
 
+html +=
+'</div>';
 
-/* =========================
+
+return html;
+
+}
+
+
+/* ==========================================
+   HTML作成
+========================================== */
+
+
+function createHTML(){
+
+
+const source =
+document.getElementById(
+"source"
+).value;
+
+
+if(!source.trim()){
+
+alert(
+"抽出HTMLを貼り付けてください！"
+);
+
+return;
+
+}
+
+
+const girls =
+getGirls(
+source
+);
+
+
+const result =
+makeCompleteHTML(
+girls
+);
+
+
+document.getElementById(
+"result"
+).value =
+result;
+
+
+document.getElementById(
+"message"
+).style.display =
+"none";
+
+}
+
+
+/* ==========================================
    コピー
-========================= */
+========================================== */
+
 
 async function copyHTML(){
 
-const value=
-$("output").value;
+
+const result =
+document.getElementById(
+"result"
+);
 
 
-if(!value){
+if(!result.value){
 
 alert(
-"先に「掲載用HTMLを作成する」を押してください"
+"先に掲載用HTMLを作成してください！"
 );
 
 return;
@@ -824,75 +1011,55 @@ return;
 
 try{
 
-await navigator.clipboard.writeText(value);
-
-alert(
-"掲載用HTMLをコピーしました！✨"
+await navigator.clipboard.writeText(
+result.value
 );
 
 }
 
-catch(e){
+catch(error){
 
-$("output")
-.removeAttribute("readonly");
+result.removeAttribute(
+"readonly"
+);
 
-$("output").select();
+result.select();
 
-document.execCommand("copy");
+document.execCommand(
+"copy"
+);
 
-$("output")
-.setAttribute("readonly","");
+result.setAttribute(
+"readonly",
+""
+);
 
-alert("コピーしました！");
+}
+
+
+const message =
+document.getElementById(
+"message"
+);
+
+
+message.style.display =
+"block";
+
+
+setTimeout(function(){
+
+message.style.display =
+"none";
+
+},2500);
 
 }
 
-}
-
-
-
-/* =========================
-   リセット
-========================= */
-
-function clearAll(){
-
-$("girlUrl").value="";
-$("girlName").value="";
-$("catchCopy").value="";
-$("size").value="";
-$("schedule").value="";
-$("photo").value="";
-
-
-$("photoPreview").innerHTML=
-
-`
-<p class="note">
-ここをタップして画像を選択してください
-</p>
-`;
-
-
-$("preview").innerHTML=
-
-`
-入力して
-「掲載用HTMLを作成する」
-を押してください
-`;
-
-
-$("output").value="";
-
-$("done").style.display="none";
-
-imageData="";
-
-}
 
 </script>
 
+
 </body>
+
 </html>
